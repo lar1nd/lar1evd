@@ -50,10 +50,15 @@ TreeElementReader::TreeElementReader(TTree * tree,
 
   element_offset_ = branch_element_->GetOffset();
   pointer_offset_ = element_offset_ +
-      // This line stopped working as of ROOT 5.34/20
+      // TODO: Figure out a way to detect which version of ROOT is
+      //       being used. The following line of code is dependent on
+      //       the version of ROOT being used. Once the version is
+      //       detected, figure out a way to choose the appropriate
+      //       line for compilation.
+      // NOTE: This line stopped working as of ROOT 5.34/20
       //branch_element_->GetInfo()->GetOffsets()[branch_element_->GetID()];
-      // This line should work for ROOT 5.34/20+. This has not been tested for
-      // previous versions.
+      // NOTE: This line should work for ROOT 5.34/20+, but does not
+      //       work for previous versions of ROOT.
       branch_element_->GetInfo()->GetElementOffset(branch_element_->GetID());
 
   ok_ = true;
