@@ -22,10 +22,16 @@ induction_pedestal = 2048
 collection_pedestal = 400
 
 # Range of ADC values to with respect to ADC baselines
-#vmin = -20
-#vmax = 80
 vmin = -20
-vmax = 50
+vmax = 80
+
+vmin_values = ( vmin + induction_pedestal, vmin + induction_pedestal,
+                vmin + induction_pedestal, vmin + induction_pedestal,
+                vmin + collection_pedestal, vmin + collection_pedestal )
+
+vmax_values = ( vmax + induction_pedestal, vmax + induction_pedestal,
+                vmax + induction_pedestal, vmax + induction_pedestal,
+                vmax + collection_pedestal, vmax + collection_pedestal )
 
 if not os.path.isfile(file_path):
     print("File {} does not exist".format(file_path))
@@ -92,10 +98,7 @@ axes = (ax1, ax2, ax3, ax4, ax5, ax6)
 
 for i in xrange(len(axes)):
     axes[i].imshow(tpc_wires[i].T, aspect=0.2, origin='lower',
-                   #vmin=vmin+induction_pedestal,
-                   #vmax=vmax+induction_pedestal,
-                   #vmin=vmin+collection_pedestal,
-                   #vmax=vmax+collection_pedestal,
+                   vmin=vmin_values[i], vmax=vmax_values[i],
                    cmap=plt.get_cmap('jet'))
     axes[i].tick_params(axis='both', which='major', labelsize=10)
     axes[i].set_title(tpc_plane_labels[i], fontsize=10)

@@ -25,10 +25,16 @@ induction_pedestal = 2048
 collection_pedestal = 400
 
 # Range of ADC values to with respect to ADC baselines
-#vmin = -20
-#vmax = 80
 vmin = -20
 vmax = 50
+
+vmin_values = ( vmin + induction_pedestal, vmin + induction_pedestal,
+                vmin + induction_pedestal, vmin + induction_pedestal,
+                vmin + collection_pedestal, vmin + collection_pedestal )
+
+vmax_values = ( vmax + induction_pedestal, vmax + induction_pedestal,
+                vmax + induction_pedestal, vmax + induction_pedestal,
+                vmax + collection_pedestal, vmax + collection_pedestal )
 
 if not os.path.isfile(file_path):
     print("File {} does not exist".format(file_path))
@@ -110,8 +116,9 @@ image_items = ( pg.ImageItem(tpc_0_u), pg.ImageItem(tpc_1_u),
                 pg.ImageItem(tpc_0_v), pg.ImageItem(tpc_1_v),
                 pg.ImageItem(tpc_0_y), pg.ImageItem(tpc_1_y) )
 
-for image_item in image_items:
-    image_item.setLookupTable(lookup_table)
+for i in xrange(len(image_items)):
+    image_items[i].setLookupTable(lookup_table)
+    image_items[i].setLevels([ vmin_values[i], vmax_values[i] ])
 
 view_boxes = ( window.addViewBox(row=1, col=1),
                window.addViewBox(row=1, col=3),
