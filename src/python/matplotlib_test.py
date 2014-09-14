@@ -83,7 +83,7 @@ print("tpc_1_u ADC count range: ({}, {})"
       .format(np.min(tpc_1_u), np.max(tpc_1_u)))
 print("tpc_1_v ADC count range: ({}, {})"
       .format(np.min(tpc_1_v), np.max(tpc_1_v)))
-print("tpc_0_y ADC count range: ({}, {})"
+print("tpc_1_y ADC count range: ({}, {})"
       .format(np.min(tpc_1_y), np.max(tpc_1_y)))
 #///////////////////////////////////////////////////////////////////////
 
