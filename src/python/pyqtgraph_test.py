@@ -72,19 +72,18 @@ print(tpc_1_y.shape)
 
 # This is here to help determine the range of ADC counts for each wire
 # plane
-print(np.min(tpc_0_u))
-print(np.max(tpc_0_u))
-print(np.min(tpc_0_v))
-print(np.max(tpc_0_v))
-print(np.min(tpc_0_y))
-print(np.max(tpc_0_y))
-
-print(np.min(tpc_1_u))
-print(np.max(tpc_1_u))
-print(np.min(tpc_1_v))
-print(np.max(tpc_1_v))
-print(np.min(tpc_1_y))
-print(np.max(tpc_1_y))
+print("tpc_0_u ADC count range: ({}, {})"
+      .format(np.min(tpc_0_u), np.max(tpc_0_u)))
+print("tpc_0_v ADC count range: ({}, {})"
+      .format(np.min(tpc_0_v), np.max(tpc_0_v)))
+print("tpc_0_y ADC count range: ({}, {})"
+      .format(np.min(tpc_0_y), np.max(tpc_0_y)))
+print("tpc_1_u ADC count range: ({}, {})"
+      .format(np.min(tpc_1_u), np.max(tpc_1_u)))
+print("tpc_1_v ADC count range: ({}, {})"
+      .format(np.min(tpc_1_v), np.max(tpc_1_v)))
+print("tpc_0_y ADC count range: ({}, {})"
+      .format(np.min(tpc_1_y), np.max(tpc_1_y)))
 #///////////////////////////////////////////////////////////////////////
 
 # Color map for wire vs. time tick
