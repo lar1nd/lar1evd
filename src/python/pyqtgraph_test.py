@@ -16,6 +16,8 @@ parser = argparse.ArgumentParser(
     description="View events from LArSoft-generated ROOT file.")
 parser.add_argument('file', type=str,
                     help="path to LArSoft-generated ROOT file")
+parser.add_argument('--entry', type=int,
+                    help="entry number in LArSoft-generated ROOT file")
 args = parser.parse_args()
 
 file_path = args.file
@@ -26,7 +28,7 @@ collection_pedestal = 400
 
 # Range of ADC values to with respect to ADC baselines
 vmin = -20
-vmax = 50
+vmax = 80
 
 vmin_values = ( vmin + induction_pedestal, vmin + induction_pedestal,
                 vmin + induction_pedestal, vmin + induction_pedestal,
@@ -42,9 +44,18 @@ if not os.path.isfile(file_path):
 
 data = dispatch(file_path)
 
-data.get_entry(2)
+entry = 0
 
 number_entries = data.entries()
+
+if args.entry is not None:
+    if args.entry < number_entries and args.entry > 0:
+        entry = args.entry
+    else:
+        print("Entry number outside of range [ 0, {} )".format(number_entries))
+        sys.exit(1)
+
+data.get_entry(entry)
 
 # The ADC data is returned as a 1-dimensional array. Reshape the array
 # into wire numbers as rows and clock ticks as columns.
@@ -106,7 +117,7 @@ window.resize(1000, 700)
 #window.setWindowTitle("LAr1-ND Event Display")
 
 # Enable anti-aliasing
-pg.setConfigOptions(antialias=True)
+#pg.setConfigOptions(antialias=True)
 
 labels = ( pg.LabelItem(text="TPC 0, u"), pg.LabelItem(text="TPC 1, u"),
            pg.LabelItem(text="TPC 0, v"), pg.LabelItem(text="TPC 1, v"),

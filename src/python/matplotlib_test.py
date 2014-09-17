@@ -13,6 +13,8 @@ parser = argparse.ArgumentParser(
     description="View events from LArSoft-generated ROOT file.")
 parser.add_argument('file', type=str,
                     help="path to LArSoft-generated ROOT file")
+parser.add_argument('--entry', type=int,
+                    help="entry number in LArSoft-generated ROOT file")
 args = parser.parse_args()
 
 file_path = args.file
@@ -39,9 +41,18 @@ if not os.path.isfile(file_path):
 
 data = dispatch(file_path)
 
-data.get_entry(2)
+entry = 0
 
 number_entries = data.entries()
+
+if args.entry is not None:
+    if args.entry < number_entries and args.entry > 0:
+        entry = args.entry
+    else:
+        print("Entry number outside of range [ 0, {} )".format(number_entries))
+        sys.exit(1)
+
+data.get_entry(entry)
 
 # The ADC data is returned as a 1-dimensional array. Reshape the array
 # into wire numbers as rows and clock ticks as columns.
