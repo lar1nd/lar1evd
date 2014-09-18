@@ -32,6 +32,7 @@ DataFetcher::~DataFetcher() {}
 void DataFetcher::get_entry(unsigned int entry) {
 
   adc_.clear();
+  pedestal_.clear();
   pdg_code_.clear();
   track_id_.clear();
   parent_id_.clear();
@@ -57,7 +58,6 @@ void DataFetcher::get_entry(unsigned int entry) {
     std::string name = raw_digit_leaf_names[i];
 
     TreeElementReader adc_branch(tree_, name + "obj.fADC");
-
     if (!adc_branch.ok()) continue;
 
     adc_rows_ = 0;
@@ -69,6 +69,17 @@ void DataFetcher::get_entry(unsigned int entry) {
       adc_cols_ = adc_ptr->size();
       adc_rows_ += 1;
     }
+
+    TreeElementReader pedestal_branch(tree_, name + "obj.fPedestal");
+    if (!pedestal_branch.ok()) continue;
+
+    for (size_t j = 0; j < pedestal_branch.entries(); j++) {
+      const double * pedestal_ptr = pedestal_branch.get<double>(j);
+      pedestal_.push_back(* pedestal_ptr);
+    }
+
+    TreeElementReader pedestal_sigma_branch(tree_, name + "obj.fSigma");
+    if (!pedestal_sigma_branch.ok()) continue;
   }
 
   std::vector<std::string>

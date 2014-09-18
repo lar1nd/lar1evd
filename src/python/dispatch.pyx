@@ -15,6 +15,7 @@ cdef extern from "../cpp/DataFetcher.h":
         unsigned int entries()
         void get_entry(unsigned int)
         short * adc()
+        double * pedestal()
         unsigned int adc_rows()
         unsigned int adc_cols()
         unsigned int number_particles()
@@ -53,6 +54,16 @@ cdef class dispatch:
             shape,
             np.NPY_SHORT,
             self.cobj.adc()
+        )
+        return ndarray
+    def pedestal(self):
+        cdef np.npy_intp shape[1]
+        shape[0] = <np.npy_intp> (self.cobj.adc_rows() + self.cobj.adc_rows())
+        ndarray = np.PyArray_SimpleNewFromData(
+            1,
+            shape,
+            np.NPY_DOUBLE,
+            self.cobj.pedestal()
         )
         return ndarray
     def number_particles(self):

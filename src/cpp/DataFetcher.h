@@ -20,21 +20,22 @@ class DataFetcher {
     return entries_;
   }
 
-  //std::vector< std::vector<short> > adc() {
-  //  return adc_;
-  //}
-
   short * adc() {
     short * adc_array = &adc_[0];
     return adc_array;
   }
 
-  // TODO: rename to adc_time_wires()?
+  double * pedestal() {
+    double * pedestal_array = &pedestal_[0];
+    return pedestal_array;
+  }
+
+  // TODO: Rename to adc_number_wires()?
   unsigned int adc_rows() {
     return adc_rows_;
   }
 
-  // TODO: rename to adc_time_ticks()?
+  // TODO: Rename to adc_number_time_ticks() or adc_number_samples()?
   unsigned int adc_cols() {
     return adc_cols_;
   }
@@ -67,26 +68,6 @@ class DataFetcher {
     double * trajectory_length_array = &trajectory_length_[0];
     return trajectory_length_array;
   }
-
-  //std::vector<int> pdg_code() {
-  //  return pdg_code_;
-  //}
-
-  //std::vector<int> track_id() {
-  //  return track_id_;
-  //}
-
-  //std::vector<int> parent_id() {
-  //  return parent_id_;
-  //}
-
-  //std::vector<double> start_momentum() {
-  //  return start_momentum_;
-  //}
-
-  //std::vector<double> trajectory_length() {
-  //  return trajectory_length_;
-  //}
 
   std::vector<std::string> process() {
     return process_;
@@ -129,8 +110,8 @@ class DataFetcher {
   unsigned int adc_cols_;
   unsigned int number_particles_;
 
-  //std::vector< std::vector<short> > adc_;
   std::vector<short> adc_;
+  std::vector<double> pedestal_;
   std::vector<int> pdg_code_;
   std::vector<int> track_id_;
   std::vector<int> parent_id_;
