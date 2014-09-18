@@ -116,6 +116,11 @@ window = pg.GraphicsWindow(title="LAr1-ND Event Display")
 window.resize(1000, 700)
 #window.setWindowTitle("LAr1-ND Event Display")
 
+# Disable scipy.weave for current version of pyqtgraph (0.9.8) if OS is
+# not Mac OS X
+if sys.platform != 'darwin':
+    pg.setConfigOptions(useWeave=False)
+
 # Enable anti-aliasing
 #pg.setConfigOptions(antialias=True)
 
