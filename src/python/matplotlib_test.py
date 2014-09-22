@@ -19,22 +19,6 @@ args = parser.parse_args()
 
 file_path = args.file
 
-# ADC baseline for induction and collection planes
-induction_pedestal = 2048
-collection_pedestal = 400
-
-# Range of ADC values to with respect to ADC baselines
-vmin = -20
-vmax = 80
-
-vmin_values = ( vmin + induction_pedestal, vmin + induction_pedestal,
-                vmin + induction_pedestal, vmin + induction_pedestal,
-                vmin + collection_pedestal, vmin + collection_pedestal )
-
-vmax_values = ( vmax + induction_pedestal, vmax + induction_pedestal,
-                vmax + induction_pedestal, vmax + induction_pedestal,
-                vmax + collection_pedestal, vmax + collection_pedestal )
-
 if not os.path.isfile(file_path):
     print("File {} does not exist".format(file_path))
     sys.exit(1)
@@ -72,6 +56,22 @@ tpc_1_y = adc[8256:9472, :]
 tpc_wires = (tpc_0_u, tpc_1_u, tpc_0_v, tpc_1_v, tpc_0_y, tpc_1_y)
 tpc_plane_labels = ("TPC 0, U", "TPC 1, U", "TPC 0, V", "TPC 1, V", "TPC 0, Y",
                     "TPC 1, Y")
+
+# ADC baseline for induction and collection planes
+induction_pedestal = 2048
+collection_pedestal = 400
+
+# Range of ADC values to with respect to ADC baselines
+vmin = -20
+vmax = 80
+
+vmin_values = ( vmin + induction_pedestal, vmin + induction_pedestal,
+                vmin + induction_pedestal, vmin + induction_pedestal,
+                vmin + collection_pedestal, vmin + collection_pedestal )
+
+vmax_values = ( vmax + induction_pedestal, vmax + induction_pedestal,
+                vmax + induction_pedestal, vmax + induction_pedestal,
+                vmax + collection_pedestal, vmax + collection_pedestal )
 
 #///////////////////////////////////////////////////////////////////////
 # For debugging

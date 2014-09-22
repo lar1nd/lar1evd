@@ -56,10 +56,10 @@ TreeElementReader::TreeElementReader(TTree * tree,
       //       detected, figure out a way to choose the appropriate
       //       line for compilation.
       // NOTE: This line stopped working as of ROOT 5.34/20
-      //branch_element_->GetInfo()->GetOffsets()[branch_element_->GetID()];
+      branch_element_->GetInfo()->GetOffsets()[branch_element_->GetID()];
       // NOTE: This line should work for ROOT 5.34/20+, but does not
       //       work for previous versions of ROOT.
-      branch_element_->GetInfo()->GetElementOffset(branch_element_->GetID());
+      //branch_element_->GetInfo()->GetElementOffset(branch_element_->GetID());
 
   ok_ = true;
 
