@@ -13,8 +13,8 @@ Requirements
 Dependencies
 ------------
 
-lar1evd is written in C++ and Python 2.7, and depends on the following
-libraries
+lar1evd is written in C++, Python 2.7 and [Cython][cython], and depends
+on the following libraries
 
 - [ROOT 5.34][root]
 - [Qt 4.8][qt]
@@ -23,7 +23,6 @@ libraries
 - [SciPy][scipy]
 - [PyQt4][pyqt] or [PySide][pyside]
 - [pyqtgraph][pyqtgraph]
-- [Cython][cython]
 
 All of these dependencies are already installed on the lar1nd gpvm
 interactive nodes. To set them up, run the command
@@ -84,7 +83,7 @@ next things we want to install are Qt4 and PyQt4
     $ brew install qt4
     $ brew install pyqt4
 
-And then the rest are just Python libraries
+And then the rest are just Python packages
 
     $ brew install numpy
     $ brew install matplotlib
