@@ -23,6 +23,7 @@ libraries
 - [SciPy][scipy]
 - [PyQt4][pyqt] or [PySide][pyside]
 - [pyqtgraph][pyqtgraph]
+- [Cython][cython]
 
 All of these dependencies are already installed on the lar1nd gpvm
 interactive nodes. To set them up, run the command
@@ -90,6 +91,7 @@ And then the rest are just Python libraries
     $ brew install scipy
     $ pip install pyopengl
     $ pip install pyqtgraph
+    $ pip install cython
 
 Super quick summary
 
@@ -104,6 +106,7 @@ Super quick summary
 9. `brew install scipy`
 10. `pip install pyopengl`
 11. `pip install pyqtgraph`
+12. `pip install cython`
 
 ### Other operating systems
 
@@ -118,5 +121,6 @@ systems will soon follow. Hooray for `apt-get` and `yum`!
 [pyqt]:http://riverbankcomputing.com/software/pyqt
 [pyside]:http://qt-project.org/wiki/PySide
 [pyqtgraph]:http://pyqtgraph.org
+[cython]:http://cython.org
 [homebrew]:http://brew.sh
 [macports]:https://macports.org
