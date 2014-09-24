@@ -1,7 +1,7 @@
 lar1evd: LAr1-ND event display
 ==============================
 
-**LAR1EVD IS CURRENTLY IN ITS ALPHA TESTING STAGE**
+**LAR1EVD IS CURRENTLY IN ITS ALPHA TESTING STAGES**
 
 LAr1-ND code: https://cdcvs.fnal.gov/redmine/projects/lar1ndcode/wiki
 
