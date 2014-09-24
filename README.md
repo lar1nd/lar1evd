@@ -34,7 +34,7 @@ Getting the dependencies installed
 
 [ Maybe this section would be more suitable on a wiki page. ]
 
-On Mac OS X 10.8+:
+### On Mac OS X 10.8+
 
 For users who are running Mac OS X, it is highly recommended that you
 install one of the following package managers as it will make the
@@ -105,8 +105,10 @@ Super quick summary
 10. `pip install pyopengl`
 11. `pip install pyqtgraph`
 
+### Other operating systems
+
 Instructions on how to install the dependencies on other operation
-systems will follow. Hooray for `apt-get` and `yum`!
+systems will soon follow. Hooray for `apt-get` and `yum`!
 
 [root]:http://root.cern.ch
 [qt]:https://qt-project.org
