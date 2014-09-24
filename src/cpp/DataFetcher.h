@@ -20,16 +20,6 @@ class DataFetcher {
     return entries_;
   }
 
-  short * adc() {
-    short * adc_array = &adc_[0];
-    return adc_array;
-  }
-
-  double * pedestal() {
-    double * pedestal_array = &pedestal_[0];
-    return pedestal_array;
-  }
-
   // TODO: Rename to adc_number_wires()?
   unsigned int adc_rows() {
     return adc_rows_;
@@ -38,6 +28,21 @@ class DataFetcher {
   // TODO: Rename to adc_number_time_ticks() or adc_number_samples()?
   unsigned int adc_cols() {
     return adc_cols_;
+  }
+
+  short * adc() {
+    short * adc_array = &adc_[0];
+    return adc_array;
+  }
+
+  uint32_t * channel() {
+    uint32_t * channel_array = &channel_[0];
+    return channel_array;
+  }
+
+  double * pedestal() {
+    double * pedestal_array = &pedestal_[0];
+    return pedestal_array;
   }
 
   unsigned int number_particles() {
@@ -111,6 +116,7 @@ class DataFetcher {
   unsigned int number_particles_;
 
   std::vector<short> adc_;
+  std::vector<uint32_t> channel_;
   std::vector<double> pedestal_;
   std::vector<int> pdg_code_;
   std::vector<int> track_id_;

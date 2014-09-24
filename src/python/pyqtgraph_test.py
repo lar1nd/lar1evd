@@ -56,11 +56,14 @@ tpc_1_u = adc[4736:6496, :]
 tpc_1_v = adc[6496:8256, :]
 tpc_1_y = adc[8256:9472, :]
 
+# Channel number of wires
+#channel = data.channel()
+
 # ADC baseline for induction and collection planes
 induction_pedestal = 2048
 collection_pedestal = 400
 
-# Range of ADC values to with respect to ADC baselines
+# Range of ADC values with respect to ADC baselines
 vmin = -20
 vmax = 80
 

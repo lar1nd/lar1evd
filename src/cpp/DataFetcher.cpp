@@ -70,6 +70,14 @@ void DataFetcher::get_entry(unsigned int entry) {
       adc_rows_ += 1;
     }
 
+    TreeElementReader channel_branch(tree_, name + "obj.fChannel");
+    if (!channel_branch.ok()) continue;
+
+    for (size_t j = 0; j < channel_branch.entries(); j++) {
+      const uint32_t * channel_ptr = channel_branch.get<uint32_t>(j);
+      channel_.push_back(* channel_ptr);
+    }
+
     TreeElementReader pedestal_branch(tree_, name + "obj.fPedestal");
     if (!pedestal_branch.ok()) continue;
 

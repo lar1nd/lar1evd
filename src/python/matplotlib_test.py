@@ -57,11 +57,14 @@ tpc_wires = (tpc_0_u, tpc_1_u, tpc_0_v, tpc_1_v, tpc_0_y, tpc_1_y)
 tpc_plane_labels = ("TPC 0, U", "TPC 1, U", "TPC 0, V", "TPC 1, V", "TPC 0, Y",
                     "TPC 1, Y")
 
+# Channel number of wires
+#channel = data.channel()
+
 # ADC baseline for induction and collection planes
 induction_pedestal = 2048
 collection_pedestal = 400
 
-# Range of ADC values to with respect to ADC baselines
+# Range of ADC values with respect to ADC baselines
 vmin = -20
 vmax = 80
 
