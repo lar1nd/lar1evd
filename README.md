@@ -27,7 +27,7 @@ libraries
 All of these dependencies are already installed on the lar1nd gpvm
 interactive nodes. To set them up, run the command
 
-    `$ source /lar1nd/app/lar1evd/setup.sh`
+    $ source /lar1nd/app/lar1evd/setup.sh
 
 Getting the dependencies installed
 ----------------------------------
@@ -51,8 +51,8 @@ ready to be used.
 First, we should run the following commands to add additional repos to
 `brew`
 
-    `$ brew tap homebrew/python`
-    `$ brew tap homebrew/science`
+    $ brew tap homebrew/python
+    $ brew tap homebrew/science
 
 To avoid using the system-installed version of Python in OS X, we will
 have to install a separate version of Python using `brew`. The reason
@@ -60,7 +60,7 @@ for doing this is that the Python libraries that we need will be much,
 much easier to install. To install Python, simply run the following
 command:
 
-    `$ brew install python`
+    $ brew install python
 
 Once Python is installed, `brew` will print out a block of text labeled
 **Caveats** which provides some important information about the recently
@@ -69,27 +69,27 @@ installed package. Pay close attention to these!
 Next we will install ROOT. Again, read the **Caveats** section
 carefully!
 
-    `$ brew install root`
+    $ brew install root
 
 Once ROOT is installed, we should verify that PyROOT is working with
 Python. To do this, start up the `python` interpreter and try importing
 ROOT with
 
-    `>>> import ROOT`
+    >>> import ROOT
 
 If Python does not complain, then PyROOT is working as expected. The
 next things we want to install are Qt4 and PyQt4
 
-    `$ brew install qt4`
-    `$ brew install pyqt4`
+    $ brew install qt4
+    $ brew install pyqt4
 
 And then the rest are just Python libraries
 
-    `$ brew install numpy`
-    `$ brew install matplotlib`
-    `$ brew install scipy`
-    `$ pip install pyopengl`
-    `$ pip install pyqtgraph`
+    $ brew install numpy
+    $ brew install matplotlib
+    $ brew install scipy
+    $ pip install pyopengl
+    $ pip install pyqtgraph
 
 Super quick summary
 
