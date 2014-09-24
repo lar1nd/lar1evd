@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import subprocess
+import fileinput
 
 from distutils.core import setup
 from distutils.extension import Extension
@@ -13,6 +14,15 @@ def root_flags(root_config='root-config'):
     root_ldflags = subprocess.Popen([root_config, '--libs'],
         stdout=subprocess.PIPE).communicate()[0].strip().split(' ')
     return root_inc, root_ldflags
+
+def root_release(root_config='root-config'):
+    root_version = subprocess.Popen([root_config, '--version'],
+        stdout=subprocess.PIPE).communicate()[0].strip().split('/')
+    return root_version
+
+def replace(file_path, search_string, replace_string):
+    for line in fileinput.input(file_path, inplace=True):
+        print line.replace(search_string, replace_string),
 
 try:
     root_inc, root_ldflags = root_flags()
@@ -29,6 +39,19 @@ except OSError:
         raise RuntimeError(
             "ROOTSYS is {0} but running {1} failed".format(
                 rootsys, root_config))
+
+root_version = root_release()
+
+if root_version[0] == '5.34' and int(root_version[1]) >= 20:
+    indent = '      '
+    comment = '//'
+    line = (
+        'branch_element_->GetInfo()->GetOffsets()[branch_element_->GetID()];',
+        'branch_element_->GetInfo()->GetElementOffset(branch_element_->GetID());',
+    )
+    tree_element_reader = '../cpp/TreeElementReader.cpp'
+    replace(tree_element_reader, indent + line[0], indent + comment + line[0])
+    replace(tree_element_reader, indent + comment + line[1], indent + line[1])
 
 module = Extension(
     name="dispatch",
