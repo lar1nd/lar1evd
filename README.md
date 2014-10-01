@@ -144,6 +144,25 @@ for the 2D view. For the 3D view
 Currently, the event display does not have the ability to scroll through
 the entries. This will be implemented sometime in the near future.
 
+### The 2D view
+
+The event display is interactive, and you should be able to zoom in and
+out using the scroll wheel of your mouse (or trackpad scrolling). You
+can also use left-click for panning the view. To reset the view,
+right-click and select "View All" from the pop-up menu.
+
+#### matplotlib backend
+
+You can also use matplotlib as the backend for the 2D view
+
+    $ ./matplotlib_view2d.py [path to LArSoft-generated ROOT file] --entry [entry number]
+
+### The 3D view
+
+You can use the scroll wheel to zoom in and out, the left-click to
+rotate the view, and the scroll wheel button (press down and hold) to
+pan the view (change the center of where the camera is pointed).
+
 
 [root]:http://root.cern.ch
 [qt]:https://qt-project.org
