@@ -112,6 +112,39 @@ Super quick summary
 Instructions on how to install the dependencies on other operation
 systems will soon follow. Hooray for `apt-get` and `yum`!
 
+Building the code
+-----------------
+
+To build the code, run the following commands
+
+    $ cd src/python
+    $ cython --cplus --fast-fail --line-directives dispatch.pyx
+    $ python setup.py build_ext --inplace
+    $ rm -rf build dispatch.cpp
+
+Alternatively, you could use the provided Bash scripts
+
+    $ cd src/python
+    $ bash build.sh && bash clean.sh
+
+You should end up with a shared object file named `dispatch.so` in your
+working directory.
+
+Running the event display
+-------------------------
+
+To run the event display in its current (messy) state
+
+    $ ./view2d.py [path to LArSoft-generated ROOT file] --entry [entry number]
+
+for the 2D view. For the 3D view
+
+    $ ./view3d.py [path to LArSoft-generated ROOT file] --entry [entry number]
+
+Currently, the event display does not have the ability to scroll through
+the entries. This will be implemented sometime in the near future.
+
+
 [root]:http://root.cern.ch
 [qt]:https://qt-project.org
 [numpy]:http://numpy.org
