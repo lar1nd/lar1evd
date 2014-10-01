@@ -54,7 +54,7 @@ void DataFetcher::get_entry(unsigned int entry) {
   std::vector<std::string>
       raw_digit_leaf_names = FindLeavesOfType("vector<raw::RawDigit>");
 
-  for (size_t i = 0; i < raw_digit_leaf_names.size(); i++) {
+  for (size_t i = 0; i < raw_digit_leaf_names.size(); ++i) {
     std::string name = raw_digit_leaf_names[i];
 
     TreeElementReader adc_branch(tree_, name + "obj.fADC");
@@ -62,7 +62,7 @@ void DataFetcher::get_entry(unsigned int entry) {
 
     adc_rows_ = 0;
     adc_cols_ = 0;
-    for (size_t j = 0; j < adc_branch.entries(); j++) {
+    for (size_t j = 0; j < adc_branch.entries(); ++j) {
       const std::vector<short> *
           adc_ptr = adc_branch.get< std::vector<short> >(j);
       adc_.insert(adc_.end(), adc_ptr->begin(), adc_ptr->end());
@@ -73,7 +73,7 @@ void DataFetcher::get_entry(unsigned int entry) {
     TreeElementReader channel_branch(tree_, name + "obj.fChannel");
     if (!channel_branch.ok()) continue;
 
-    for (size_t j = 0; j < channel_branch.entries(); j++) {
+    for (size_t j = 0; j < channel_branch.entries(); ++j) {
       const uint32_t * channel_ptr = channel_branch.get<uint32_t>(j);
       channel_.push_back(* channel_ptr);
     }
@@ -81,7 +81,7 @@ void DataFetcher::get_entry(unsigned int entry) {
     TreeElementReader pedestal_branch(tree_, name + "obj.fPedestal");
     if (!pedestal_branch.ok()) continue;
 
-    for (size_t j = 0; j < pedestal_branch.entries(); j++) {
+    for (size_t j = 0; j < pedestal_branch.entries(); ++j) {
       const double * pedestal_ptr = pedestal_branch.get<double>(j);
       pedestal_.push_back(* pedestal_ptr);
     }
@@ -99,7 +99,7 @@ void DataFetcher::get_entry(unsigned int entry) {
   // TODO: PERMANENTLY FIX THIS.
   mc_particle_leaf_names.pop_back();
 
-  for (size_t i = 0; i < mc_particle_leaf_names.size(); i++) {
+  for (size_t i = 0; i < mc_particle_leaf_names.size(); ++i) {
     std::string name = mc_particle_leaf_names[i];
 
     TreeElementReader pdg_code_branch(tree_, name + "obj.fpdgCode");
@@ -115,7 +115,7 @@ void DataFetcher::get_entry(unsigned int entry) {
 
     number_particles_ = pdg_code_branch.entries();
 
-    for (size_t j = 0; j < number_particles_; j++) {
+    for (size_t j = 0; j < number_particles_; ++j) {
       const int * pdg_code_ptr = pdg_code_branch.get<int>(j);
       const int * track_id_ptr = track_id_branch.get<int>(j);
       const int * parent_id_ptr = parent_id_branch.get<int>(j);
@@ -138,7 +138,7 @@ void DataFetcher::get_entry(unsigned int entry) {
 
       double trajectory_length = 0;
 
-      for (size_t k = 0; k < number_points; k++) {
+      for (size_t k = 0; k < number_points; ++k) {
         const TLorentzVector & position = (* trajectory)[k].first;
         const TLorentzVector & momentum = (* trajectory)[k].second;
         trajectory_x.push_back(position.X());
@@ -194,7 +194,7 @@ std::vector<std::string> DataFetcher::FindLeavesOfType(std::string pattern) {
       pattern.end());
 
   TObjArray * list = tree_->GetListOfLeaves();
-  for (int i = 0; i < list->GetEntriesFast(); i++) {
+  for (int i = 0; i < list->GetEntriesFast(); ++i) {
     TObject * o = list->At(i);
     TLeaf * leaf = (TLeaf *) o;
     std::string name = leaf->GetTypeName();
