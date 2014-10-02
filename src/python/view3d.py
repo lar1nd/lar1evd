@@ -66,7 +66,7 @@ pg.setConfigOptions(antialias=True)
 # TODO: Figure out a better way of defining the edges of the TPCs.
 tpc_x = (-200, 0, 200)
 tpc_y = (-200, 200)
-tpc_z = (-182.5, 182.5)
+tpc_z = (0, 365)
 
 tpc = np.array([
     [[ tpc_x[0], tpc_z[0], tpc_y[0] ], [ tpc_x[0], tpc_z[1], tpc_y[0] ]],
