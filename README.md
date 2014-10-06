@@ -115,16 +115,20 @@ systems will soon follow. Hooray for `apt-get` and `yum`!
 Building the code
 -----------------
 
+First, clone the repository onto your computer
+
+    $ git@github.com:lar1nd/lar1evd.git
+
 To build the code, run the following commands
 
-    $ cd src/python
+    $ cd lar1evd/src/python
     $ cython --cplus --fast-fail --line-directives dispatch.pyx
     $ python setup.py build_ext --inplace
     $ rm -rf build dispatch.cpp
 
 Alternatively, you could use the provided Bash scripts
 
-    $ cd src/python
+    $ cd lar1evd/src/python
     $ bash build.sh && bash clean.sh
 
 You should end up with a shared object file named `dispatch.so` in your
