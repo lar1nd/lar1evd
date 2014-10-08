@@ -121,7 +121,7 @@ Building the code
 
 First, clone the repository onto your computer
 
-    $ git@github.com:lar1nd/lar1evd.git
+    $ git clone https://github.com/lar1nd/lar1evd.git
 
 To build the code, run the following commands
 
