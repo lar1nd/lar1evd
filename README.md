@@ -171,6 +171,9 @@ interactive elements. If you want to use an image from the 2D view for
 a presentation, I would suggest using matplotlib to export the image
 as a PDF file!
 
+I plan to have an 'export to PDF' option in the main 2D event display
+in the future where it will use matplotlib to perform the export.
+
 ### The 3D view
 
 You can use the scroll wheel to zoom in and out, the left-click to
