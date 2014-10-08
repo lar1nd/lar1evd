@@ -165,6 +165,12 @@ You can also use matplotlib as the backend for the 2D view
 
     $ ./matplotlib_view2d.py [path to LArSoft-generated ROOT file] --entry [entry number]
 
+The image quality of matplotlib is higher than pyqtgraph (used in the
+the normal 2D event display), but pyqtgraph is faster for displaying
+interactive elements. If you want to use an image from the 2D view for
+a presentation, I would suggest using matplotlib to export the image
+as a PDF file!
+
 ### The 3D view
 
 You can use the scroll wheel to zoom in and out, the left-click to
