@@ -1,6 +1,8 @@
 #ifndef DATAFETCHER_H_
 #define DATAFETCHER_H_
 
+#include <stdint.h>
+
 #include <string>
 #include <vector>
 
