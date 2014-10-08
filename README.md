@@ -48,7 +48,11 @@ should be similar in MacPorts (Corey, could you verify and update this
 README?). This guide assumes that Homebrew is set up correctly and is
 ready to be used.
 
-First, we should run the following commands to add additional repos to
+The first thing we should do is run `brew update` and `brew doctor`, and
+make sure that we have the appropriate version of Xcode and Command Line
+Tools installed.
+
+Second, we should run the following commands to add additional repos to
 `brew`
 
     $ brew tap homebrew/python
