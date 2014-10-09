@@ -38,5 +38,16 @@
 
 
 
+Here's the condensed version you could copy and paste:
 
-    
+    sudo port install root5 +python27
+    sudo port select python python27
+    sudo port install py27-numpy
+    sudo mv /Library/Python/2.7/site-packages/easy-install.pth /Library/Python/2.7/site-packages/easy-install.pth_backup
+    sudo port install py27-pyqt4
+    sudo port install py27-matplotlib
+    sudo port install py27-scipy
+    sudo port install py27-opengl
+    sudo port install py27-pyqtgraph
+    sudo port select cython cython27
+
