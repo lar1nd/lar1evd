@@ -121,7 +121,7 @@ Building the code
 
 First, clone the repository onto your computer
 
-    $ git@github.com:lar1nd/lar1evd.git
+    $ git clone https://github.com/lar1nd/lar1evd.git
 
 To build the code, run the following commands
 
@@ -165,11 +165,21 @@ You can also use matplotlib as the backend for the 2D view
 
     $ ./matplotlib_view2d.py [path to LArSoft-generated ROOT file] --entry [entry number]
 
+The image quality of matplotlib is higher than pyqtgraph (used in the
+the normal 2D event display), but pyqtgraph is faster for displaying
+interactive elements. If you want to use an image from the 2D view for
+a presentation, I would suggest using matplotlib to export the image
+as a PDF file!
+
+I plan to have an 'export to PDF' option in the main 2D event display
+in the future where it will use matplotlib to perform the export.
+
 ### The 3D view
 
 You can use the scroll wheel to zoom in and out, the left-click to
-rotate the view, and the scroll wheel button (press down and hold) to
-pan the view (change the center of where the camera is pointed).
+rotate the view, and the scroll wheel button (MOUSE3, press down and
+hold) to pan the view (change the center of where the camera is
+pointed).
 
 
 [root]:http://root.cern.ch
