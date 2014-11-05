@@ -33,7 +33,7 @@ entry = 0
 number_entries = data.entries()
 
 if args.entry is not None:
-    if args.entry < number_entries and args.entry > 0:
+    if args.entry < number_entries and args.entry >= 0:
         entry = args.entry
     else:
         print("Entry number outside of range [ 0, {} )".format(number_entries))
@@ -130,8 +130,8 @@ file_path_label = QtGui.QLabel("File path: {}".format(file_path))
 number_entries_label = QtGui.QLabel(
     "Total number of entries: {}".format(number_entries))
 entry_number_label = QtGui.QLabel("Entry:")
-entry_number_spin_box = pg.SpinBox(value=1, step=1, int=True,
-                                   bounds=[1, number_entries])
+entry_number_spin_box = pg.SpinBox(value=entry, step=1, int=True,
+                                   bounds=[0, number_entries - 1])
 # Add widgets to the layout in their proper positions
 layout.addWidget(file_path_label, 0, 0, 1, 2)
 layout.addWidget(number_entries_label, 1, 0, 1, 2)
@@ -219,7 +219,7 @@ window2d.addItem(y_axes[5], row=7, col=2)
 
 def update(sb):
 
-    entry = sb.value() - 1
+    entry = sb.value()
     data.get_entry(entry)
 
     adc = data.adc().reshape((data.adc_rows(), data.adc_cols()))
