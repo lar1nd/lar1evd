@@ -114,10 +114,33 @@ color_map = pg.ColorMap(pos, color)
 lookup_table = color_map.getLookupTable(0.0, 255.0, 256)
 
 app = QtGui.QApplication([])
+# Main window
+window = QtGui.QMainWindow()
+window.setWindowTitle("LAr1-ND Event Display")
+window.resize(100, 100)
+window.show()
+# Define a top-level widget to hold everything
+widget = QtGui.QWidget()
+window.setCentralWidget(widget)
+# Create a grid layout to manage the widgets size and position
+layout = QtGui.QGridLayout()
+widget.setLayout(layout)
+# Create some widgets to be placed inside
+file_path_label = QtGui.QLabel("File path: {}".format(file_path))
+number_entries_label = QtGui.QLabel(
+    "Total number of entries: {}".format(number_entries))
+entry_number_label = QtGui.QLabel("Entry:")
+entry_number_spin_box = pg.SpinBox(value=1, step=1, int=True,
+                                   bounds=[1, number_entries])
+# Add widgets to the layout in their proper positions
+layout.addWidget(file_path_label, 0, 0, 1, 2)
+layout.addWidget(number_entries_label, 1, 0, 1, 2)
+layout.addWidget(entry_number_label, 2, 0, 1, 1)
+layout.addWidget(entry_number_spin_box, 2, 1, 1, 1)
 # Create a GraphicsWindow for wire plane views
-window = pg.GraphicsWindow(title="LAr1-ND Event Display")
-window.resize(1000, 700)
-#window.setWindowTitle("LAr1-ND Event Display")
+window2d = pg.GraphicsWindow(title="LAr1-ND Event Display: 2D View")
+window2d.resize(1000, 700)
+#window2d.setWindowTitle("LAr1-ND Event Display")
 
 # Disable scipy.weave for current version of pyqtgraph (0.9.8) if OS is
 # not Mac OS X
@@ -139,12 +162,12 @@ for i in xrange(len(image_items)):
     image_items[i].setLookupTable(lookup_table)
     image_items[i].setLevels([ vmin_values[i], vmax_values[i] ])
 
-view_boxes = ( window.addViewBox(row=1, col=1),
-               window.addViewBox(row=1, col=3),
-               window.addViewBox(row=4, col=1),
-               window.addViewBox(row=4, col=3),
-               window.addViewBox(row=7, col=1),
-               window.addViewBox(row=7, col=3) )
+view_boxes = ( window2d.addViewBox(row=1, col=1),
+               window2d.addViewBox(row=1, col=3),
+               window2d.addViewBox(row=4, col=1),
+               window2d.addViewBox(row=4, col=3),
+               window2d.addViewBox(row=7, col=1),
+               window2d.addViewBox(row=7, col=3) )
 
 for i in xrange(len(view_boxes)):
     view_boxes[i].addItem(image_items[i])
@@ -171,28 +194,50 @@ for axis in y_axes:
     axis.setLabel("Time tick")
 
 # u plane views
-window.addItem(labels[0], row=0, col=1)
-window.addItem(labels[1], row=0, col=3)
-window.addItem(x_axes[0], row=2, col=1)
-window.addItem(x_axes[1], row=2, col=3)
-window.addItem(y_axes[0], row=1, col=0)
-window.addItem(y_axes[1], row=1, col=2)
+window2d.addItem(labels[0], row=0, col=1)
+window2d.addItem(labels[1], row=0, col=3)
+window2d.addItem(x_axes[0], row=2, col=1)
+window2d.addItem(x_axes[1], row=2, col=3)
+window2d.addItem(y_axes[0], row=1, col=0)
+window2d.addItem(y_axes[1], row=1, col=2)
 
 # v plane views
-window.addItem(labels[2], row=3, col=1)
-window.addItem(labels[3], row=3, col=3)
-window.addItem(x_axes[2], row=5, col=1)
-window.addItem(x_axes[3], row=5, col=3)
-window.addItem(y_axes[2], row=4, col=0)
-window.addItem(y_axes[3], row=4, col=2)
+window2d.addItem(labels[2], row=3, col=1)
+window2d.addItem(labels[3], row=3, col=3)
+window2d.addItem(x_axes[2], row=5, col=1)
+window2d.addItem(x_axes[3], row=5, col=3)
+window2d.addItem(y_axes[2], row=4, col=0)
+window2d.addItem(y_axes[3], row=4, col=2)
 
 # y plane views
-window.addItem(labels[4], row=6, col=1)
-window.addItem(labels[5], row=6, col=3)
-window.addItem(x_axes[4], row=8, col=1)
-window.addItem(x_axes[5], row=8, col=3)
-window.addItem(y_axes[4], row=7, col=0)
-window.addItem(y_axes[5], row=7, col=2)
+window2d.addItem(labels[4], row=6, col=1)
+window2d.addItem(labels[5], row=6, col=3)
+window2d.addItem(x_axes[4], row=8, col=1)
+window2d.addItem(x_axes[5], row=8, col=3)
+window2d.addItem(y_axes[4], row=7, col=0)
+window2d.addItem(y_axes[5], row=7, col=2)
+
+def update(sb):
+
+    entry = sb.value() - 1
+    data.get_entry(entry)
+
+    adc = data.adc().reshape((data.adc_rows(), data.adc_cols()))
+
+    tpc_0_u = adc[0:1760, :]
+    tpc_0_v = adc[1760:3520, :]
+    tpc_0_y = adc[3520:4736, :]
+    tpc_1_u = adc[4736:6496, :]
+    tpc_1_v = adc[6496:8256, :]
+    tpc_1_y = adc[8256:9472, :]
+
+    tpc = ( tpc_0_u, tpc_1_u, tpc_0_v, tpc_1_v, tpc_0_y, tpc_1_y )
+
+    for i in xrange(len(image_items)):
+        image_items[i].setImage(tpc[i])
+        image_items[i].setLevels([ vmin_values[i], vmax_values[i] ])
+
+entry_number_spin_box.sigValueChanged.connect(update)
 
 ## Start Qt event loop unless running in interactive mode.
 if __name__ == '__main__':
