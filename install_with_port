@@ -1,0 +1,53 @@
+1) Install port by downloading it from macports.org
+
+2) Using port, install root with python to get pyroot.  This takes awhile:
+    
+    sudo port install root5 +python27
+
+3) Make sure python27 from macports is your default python:
+    
+    sudo port select python python27
+
+3) Get numpy with macports and make sure it works:
+    
+    sudo port install py27-numpy
+
+    a) To verify it, open python and:
+      
+      import numpy
+      print(numpy.__file__)
+
+      If it's /System/Library/.... there is a problem that we need to fix:
+
+      sudo mv /Library/Python/2.7/site-packages/easy-install.pth /Library/Python/2.7/site-packages/easy-install.pth_backup
+
+      For more information as to why you need to do this, check out (http://stackoverflow.com/questions/23483763/how-to-make-macports-python-use-its-own-packages-over-another-installations)
+
+4) Now that numpy is working we can gather up the rest of the dependancies:
+  
+    sudo port install py27-pyqt4
+    (that will install qt4 automatically, takes some time)
+
+    sudo port install py27-matplotlib
+    sudo port install py27-scipy
+    sudo port install py27-opengl
+    sudo port install py27-pyqtgraph
+
+5) Cython should have been installed as a dependancy to an earlier package.  You can activate it with port select:
+    sudo port select cython cython27
+
+
+
+Here's the condensed version you could copy and paste:
+
+    sudo port install root5 +python27
+    sudo port select python python27
+    sudo port install py27-numpy
+    sudo mv /Library/Python/2.7/site-packages/easy-install.pth /Library/Python/2.7/site-packages/easy-install.pth_backup
+    sudo port install py27-pyqt4
+    sudo port install py27-matplotlib
+    sudo port install py27-scipy
+    sudo port install py27-opengl
+    sudo port install py27-pyqtgraph
+    sudo port select cython cython27
+
